@@ -20,9 +20,9 @@ function Footer() {
         <div className="space-y-6">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <h2 className="text-md md:text-2xl font-light tracking-tight leading-tight">
-              Profile<span className="font-semibold text-white">X</span>
-            </h2>
+             
+          <img src="/images/profile.jpg" alt="Fayz" className="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover"/>
+        
           </div>
 
           {/* Links */}
@@ -33,7 +33,7 @@ function Footer() {
                   href="/#"
                   className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
                 >
-                  Services
+                  Certificate
                 </a>
               </li>
               <li>
@@ -57,7 +57,7 @@ function Footer() {
                   href="/#"
                   className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
                 >
-                  Reviews
+                  Skills
                 </a>
               </li>
               <li>
@@ -72,7 +72,7 @@ function Footer() {
           </nav>
 
           {/* Copyright */}
-          <p className="text-sm text-gray-500 mt-2">© 2025  profileX</p>
+          <p className="text-sm text-gray-500 mt-2">© 2025</p>
         </div>
 
         {/* Right Section - Social Media & Credits */}
@@ -87,7 +87,7 @@ function Footer() {
               <Facebook size={20} aria-hidden="true" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/fayruary/"
               aria-label="Instagram"
               className="hover:text-gray-400 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
             >
