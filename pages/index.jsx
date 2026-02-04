@@ -17,21 +17,21 @@ export default function Home() {
           content="Saya adalah Fullstack Developer yang membangun aplikasi web dan produk digital untuk membantu mengembangkan bisnis."
         />
 
-        <meta name="author" content="Nama Kamu" />
+        <meta name="author" content="Muhammad Fairuz Anwar" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Nama Kamu – Fullstack Developer" />
+        <meta property="og:title" content="Portfolio – Muhammad Fairuz Anwar" />
         <meta
           property="og:description"
           content="Fullstack Developer yang fokus membangun solusi web modern dan scalable."
         />
-        <meta property="og:url" content="https://website-kamu.com" />
+        <meta property="og:url" content="https://creatifaii.vercel.app" />
         <meta property="og:image" content="/og-image.png" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nama Kamu – Fullstack Developer" />
+        <meta name="twitter:title" content="Muhammad Fairuz Anwar – Fullstack Developer" />
         <meta
           name="twitter:description"
           content="Fullstack Developer yang membangun solusi web modern."

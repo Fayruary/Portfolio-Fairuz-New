@@ -44,7 +44,7 @@ export default function Hero() {
           <Menu className="w-6 h-6 text-white"/>
         </button>
 
-        <a href="/cv.pdf" download className="hidden md:flex items-center gap-2 bg-gradient-to-r from-neutral-800 to-black 
+        <a href="/cvfai.pdf" download className="hidden md:flex items-center gap-2 bg-gradient-to-r from-neutral-800 to-black 
                                            px-6 py-3 border border-gray-700 rounded-full font-medium 
                                            hover:opacity-90 transition text-sm">
           Download CV
@@ -71,7 +71,7 @@ export default function Hero() {
               <Link href="#certificate" onClick={closeMenu} className="hover:text-white transition">Certificate</Link>
               <Link href="#skills" onClick={closeMenu} className="hover:text-white transition">Skills</Link>
               <Link href="#contact" onClick={closeMenu} className="hover:text-white transition">Contact</Link>
-              <a href="/cv.pdf" download onClick={closeMenu} className="bg-gradient-to-r from-neutral-800 to-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:opacity-90 transition text-sm w-fit">
+              <a href="/cvfai.pdf" download onClick={closeMenu} className="bg-gradient-to-r from-neutral-800 to-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:opacity-90 transition text-sm w-fit">
                 Download CV
               </a>
             </nav>
