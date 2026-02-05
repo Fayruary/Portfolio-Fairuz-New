@@ -1,114 +1,62 @@
-import { Twitter, Instagram, Facebook, Dribbble } from "lucide-react";
+import { FaInstagram, FaTelegramPlane, FaGithub } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 import { memo } from "react";
 
-/**
- * Footer Component
- * Displays the site logo, navigation links, social media icons, and credits.
- *
- * @component
- * @returns {JSX.Element} Footer UI
- */
 function Footer() {
   return (
-    <footer
-      className="bg-black text-gray-400 py-10"
-      role="contentinfo"
-      aria-label="Site footer"
-    >
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-10">
-        {/* Left Section - Branding & Navigation */}
-        <div className="space-y-6">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-             
-          <img src="/images/profile.jpg" alt="Fayz" className="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover"/>
-        
+    <footer className="bg-black border-t border-white/10 text-gray-400 py-12">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row md:justify-between items-center md:items-start gap-10 text-center md:text-left">
+
+        {/* LEFT */}
+        <div className="space-y-6 flex flex-col items-center md:items-start">
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/profile.jpg"
+              alt="Fayz"
+              className="h-10 w-10 rounded-full object-cover"
+            />
+            <span className="text-white font-semibold text-lg">
+              Muhammad Fairuz
+            </span>
           </div>
 
-          {/* Links */}
-          <nav aria-label="Footer navigation">
-            <ul className="flex gap-6 text-sm flex-wrap">
-              <li>
-                <a
-                  href="/#"
-                  className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-                >
-                  Certificate
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#"
-                  className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-                >
-                  Projects
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#"
-                  className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-                >
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#"
-                  className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-                >
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#"
-                  className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-                >
-                  Contact
-                </a>
-              </li>
+          <nav>
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm md:flex md:gap-6">
+              <li><a href="#certificate" className="hover:text-white transition">Certificate</a></li>
+              <li><a href="#projects" className="hover:text-white transition">Projects</a></li>
+              <li><a href="#skills" className="hover:text-white transition">Skills</a></li>
+              <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
             </ul>
           </nav>
 
-          {/* Copyright */}
-          <p className="text-sm text-gray-500 mt-2">© 2025</p>
+          <p className="text-xs text-gray-500">
+            © {new Date().getFullYear()} Muhammad Fairuz. All rights reserved.
+          </p>
         </div>
 
-        {/* Right Section - Social Media & Credits */}
-        <div className="flex flex-col justify-between items-end w-full md:w-auto gap-6">
-          {/* Social Icons */}
+        {/* RIGHT */}
+        <div className="flex flex-col items-center md:items-end gap-5">
+          <span className="text-sm text-gray-500">Follow Me</span>
+
           <div className="flex items-center gap-5 text-white text-lg">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="hover:text-gray-400 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-            >
-              <Facebook size={20} aria-hidden="true" />
+            <a href="https://www.instagram.com/fayruary/" className="hover:text-gray-400 transition">
+              <FaInstagram />
             </a>
-            <a
-              href="https://www.instagram.com/fayruary/"
-              aria-label="Instagram"
-              className="hover:text-gray-400 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-            >
-              <Instagram size={20} aria-hidden="true" />
+
+            <a href="https://t.me/anaravaa" className="hover:text-gray-400 transition">
+              <FaTelegramPlane />
             </a>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="hover:text-gray-400 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-            >
-              <Twitter size={20} aria-hidden="true" />
+
+            <a href="https://x.com/fayruary" className="hover:text-gray-400 transition">
+              <FaXTwitter />
             </a>
-            <a
-              href="#"
-              aria-label="Dribbble"
-              className="hover:text-gray-400 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-            >
-              <Dribbble size={20} aria-hidden="true" />
+
+            <a href="https://github.com/Fayruary" className="hover:text-gray-400 transition">
+              <FaGithub />
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );

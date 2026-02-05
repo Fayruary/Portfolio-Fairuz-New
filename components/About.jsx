@@ -1,4 +1,7 @@
 import { memo, useState } from "react";
+import { FaInstagram, FaTelegramPlane, FaGithub } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
+
 
 /**
  * About Component
@@ -37,12 +40,27 @@ function About() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <section
@@ -80,14 +98,65 @@ function About() {
           </p>
 
           {/* Connect Button */}
-          <button
-            className="mt-6 bg-gradient-to-r from-neutral-800 to-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:opacity-90 transition"
-            onClick={() =>
-              document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Connect with me
-          </button>
+         <a
+  className="inline-block mt-3
+             px-1 py-5 font-medium 
+            "
+>
+  Connect with me
+</a>
+
+            {/* Social Media Icons */}
+<div className="mt-1 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-3">
+  <a
+    href="https://www.instagram.com/fayruary/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 p-3 rounded-lg
+               border border-white/10 bg-white/5
+               hover:bg-white/10 transition"
+  >
+    <FaInstagram className="w-4 h-4 text-white/80" />
+    <span className="text-xs text-white/80 font-medium">Instagram</span>
+  </a>
+
+  <a
+    href="https://github.com/Fayruary"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 p-3 rounded-lg
+               border border-white/10 bg-white/5
+               hover:bg-white/10 transition"
+  >
+    <FaGithub className="w-4 h-4 text-white/80" />
+    <span className="text-xs text-white/80 font-medium">GitHub</span>
+  </a>
+
+  <a
+    href="https://x.com/fayruary"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 p-3 rounded-lg
+               border border-white/10 bg-white/5
+               hover:bg-white/10 transition"
+  >
+    <FaXTwitter className="w-4 h-4 text-white/80" />
+    <span className="text-xs text-white/80 font-medium">X</span>
+  </a>
+
+  <a
+    href="https://t.me/anaravaa"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 p-3 rounded-lg
+               border border-white/10 bg-white/5
+               hover:bg-white/10 transition"
+  >
+    <FaTelegramPlane className="w-4 h-4 text-white/80" />
+    <span className="text-xs text-white/80 font-medium">Telegram</span>
+  </a>
+</div>
+
         </article>
 
         {/* Right Section - Bio, Skills, Experience */}
@@ -169,6 +238,7 @@ function About() {
               Send Message
             </button>
             {submitted && <p className="text-green-400 mt-2">Message sent! Thank you.</p>}
+
           </form>
         </article>
       </div>

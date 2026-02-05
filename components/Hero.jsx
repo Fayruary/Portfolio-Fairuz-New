@@ -1,62 +1,117 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaGithub} from 'react-icons/fa';
-import { SiTailwindcss, SiNextdotjs, SiMysql, } from 'react-icons/si';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaGithub } from 'react-icons/fa';
+import { SiTailwindcss, SiNextdotjs, SiMysql, SiVite } from 'react-icons/si';
 import { BiLinkExternal } from 'react-icons/bi';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  /* ===== TYPING EFFECT (NAMA SAJA) ===== */
+  const fullName = 'Muhammad Fairuz Anwar';
+  const [typedName, setTypedName] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const speed = isDeleting ? 60 : 120;
+
+    const timeout = setTimeout(() => {
+      setTypedName(prev =>
+        isDeleting
+          ? fullName.substring(0, prev.length - 1)
+          : fullName.substring(0, prev.length + 1)
+      );
+
+      if (!isDeleting && typedName === fullName) {
+        setTimeout(() => setIsDeleting(true), 1200);
+      }
+
+      if (isDeleting && typedName === '') {
+        setIsDeleting(false);
+      }
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [typedName, isDeleting, fullName]);
+
   const handleMenuToggle = useCallback(() => setIsMenuOpen(prev => !prev), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
- const skills = [
-  { icon: <FaHtml5 className="text-orange-500 w-8 h-8" />, level: 'Advanced' },
-  { icon: <FaCss3Alt className="text-blue-500 w-8 h-8" />, level: 'Advanced' },
-  { icon: <FaJs className="text-yellow-400 w-8 h-8" />, level: 'Advanced' },
-  { icon: <FaReact className="text-blue-400 w-8 h-8" />, level: 'Advanced' },
-  { icon: <SiNextdotjs className="text-white w-8 h-8" />, level: 'Advanced' },
-  { icon: <SiTailwindcss className="text-sky-400 w-8 h-8" />, level: 'Advanced' },
-  { icon: <FaNode className="text-green-500 w-8 h-8" />, level: 'Intermediate' },
-  { icon: <SiMysql className="text-blue-700 w-8 h-8" />, level: 'Advanced' },
-];
+  const skills = [
+    { icon: <FaHtml5 className="text-orange-500 w-8 h-8" />, level: 'Advanced' },
+    { icon: <FaCss3Alt className="text-blue-500 w-8 h-8" />, level: 'Advanced' },
+    { icon: <FaJs className="text-yellow-400 w-8 h-8" />, level: 'Advanced' },
+    { icon: <FaReact className="text-blue-400 w-8 h-8" />, level: 'Advanced' },
+    { icon: <SiNextdotjs className="text-white w-8 h-8" />, level: 'Advanced' },
+    { icon: <SiTailwindcss className="text-sky-400 w-8 h-8" />, level: 'Advanced' },
+    { icon: <FaNode className="text-green-500 w-8 h-8" />, level: 'Intermediate' },
+    { icon: <SiVite className="text-purple-500 w-8 h-8" />, level: 'Advanced' },
+    { icon: <SiMysql className="text-blue-700 w-8 h-8" />, level: 'Advanced' },
+  ];
 
 
   const projects = [
-    { 
-      src: '/images/website-perpus.png', 
-      alt: 'Project 1', 
-      live: 'https://perpus-iota.vercel.app/', 
-      github: 'https://github.com/Fayruary/perpustakaan-sederhana', 
-      span: 'sm:col-span-2 lg:col-span-2', 
-      aspect: 'aspect-[16/9]' 
-    },
-    { 
-      src: '/images/lp.png', 
-      alt: 'Project 2', 
-      live: 'https://landingpage.vercel.app', 
-      github: 'https://github.com/Fayruary/Tugas-AAS-React-Vite', 
-      aspect: 'aspect-[4/3]' 
-    },
-    { 
-      src: '/images/nime2.png', 
-      alt: 'Project 3', 
-      live: 'https://nime-fayz.vercel.app', 
-      github: 'https://github.com/username/nime-fayz', 
-      span: 'sm:col-span-2', 
-      aspect: 'aspect-[16/9]' 
-    },
-  ];
+  {
+    src: '/images/website-perpus.png',
+    title: 'Jendela Dunia',
+    desc: 'Web-based library system for borrowing, returning, and managing book inventory.',
+    tech: ['Next.js', 'TailwindCSS', 'MySQL', 'Node.js'],
+    live: 'https://perpus-iota.vercel.app/',
+    github: 'https://github.com/Fayruary/perpustakaan-sederhana',
+    span: 'sm:col-span-2 lg:col-span-2',
+    aspect: 'aspect-[16/9]'
+  },
+  {
+    src: '/images/lp.png',
+    title: 'Borcelle Thrifting',
+    desc: 'Responsive product landing page with modern UI animation and SEO optimization.',
+    tech: ['React', 'Vite', 'TailwindCSS'],
+    live: 'https://landingpage.vercel.app',
+    github: 'https://github.com/Fayruary/Tugas-AAS-React-Vite',
+    aspect: 'aspect-[4/3]'
+  },
+  {
+    src: '/images/nime2.png',
+    title: 'Anime Streaming Website',
+    desc: 'Streaming website with search, filtering, and dynamic anime data integration.',
+    tech: ['Next.js', 'API', 'TailwindCSS'],
+    live: 'https://nime-fayz.vercel.app',
+    github: 'https://github.com/username/nime-fayz',
+    span: 'sm:col-span-2',
+    aspect: 'aspect-[16/9]'
+  },
+];
+
 
   const certificates = [
-    { src: '/images/react.png', alt: 'Certificate 1' },
-    { src: '/images/dasar.png', alt: 'Certificate 2' },
-    { src: '/images/react.png', alt: 'Certificate 3' },
-  ];
+  {
+    src: '/images/react.png',
+    title: 'React Developer Certificate',
+    issuer: 'Dicoding Indonesia',
+    year: '2024',
+    desc: 'Certification for completing React development training including hooks, state management, and SPA architecture.'
+  },
+  {
+    src: '/images/dasar.png',
+    title: 'Basic Web Development',
+    issuer: 'Dicoding Indonesia',
+    year: '2024',
+    desc: 'Certification covering HTML, CSS, JavaScript fundamentals and responsive web design.'
+  },
+  {
+    src: '/images/react.png',
+    title: 'Frontend Intermediate',
+    issuer: 'Dicoding Indonesia',
+    year: '2025',
+    desc: 'Intermediate level frontend certification focusing on modern UI development and performance optimization.'
+  },
+];
+
 
   return (
     <div className="bg-black text-white min-h-screen w-full scroll-smooth">
@@ -124,38 +179,73 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-sm text-gray-300 backdrop-blur-md w-fit border border-white/10">
               <span className="text-xs">●</span> UI/UX & Fullstack Dev
             </div>
+
+            {/* ===== NAMA (TYPING EFFECT) ===== */}
             <h1 className="text-5xl md:text-6xl font-light tracking-tight leading-tight">
-              Muhammad Fairuz <span className="font-semibold text-white">Anwar</span>
+              {typedName}
+              <span className="animate-pulse">|</span>
               <span className="inline-block ml-2 rounded-full bg-white/10 p-2">
-                <ArrowUpRight className="w-4 h-4"/>
+                <ArrowUpRight className="w-4 h-4" />
               </span>
             </h1>
-            <p className="text-lg text-gray-400 max-w-xl">
-              I’m a versatile UI/UX Designer and Fullstack Developer specializing in web and product design to help grow your business. Let’s build something great!
-            </p>
 
+            <p className="text-lg text-gray-400 max-w-xl">
+              I’m a versatile UI/UX Designer and Fullstack Developer specializing in web and product design to help grow your business.
+            </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <Link href="#projects" className="bg-white text-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:bg-gray-200 transition text-sm">
                 See All Projects
               </Link>
-              <button className="bg-gradient-to-r from-neutral-800 to-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:opacity-90 transition text-sm">
-                Contact Now
-              </button>
+              <Link
+  href="#contact"
+  className="bg-gradient-to-r from-neutral-800 to-black px-6 py-3 border border-gray-700 rounded-full font-medium hover:opacity-90 transition text-sm"
+>
+  Contact Now
+</Link>
+
             </div>
           </div>
 
           {/* Floating Testimonials */}
           <div className="relative h-[280px] md:h-[300px] lg:h-[320px] w-full">
-            <blockquote className="absolute top-6 left-0 bg-gradient-to-br from-white/5 to-white/10 border border-white/10 text-base text-white p-5 rounded-xl shadow-md w-80 rotate-[-4deg] backdrop-blur-md">
-              "Bekerja dengannya sangat menyenangkan."
-              <footer className="text-right mt-3 text-sm text-gray-400">– Fajril</footer>
-            </blockquote>
+  <motion.blockquote
+    animate={{
+      y: [-6, 6, -6],
+      rotate: [-4, -2, -4],
+    }}
+    transition={{
+      duration: 6,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    }}
+    className="absolute top-6 left-0 bg-gradient-to-br from-white/5 to-white/10 
+               border border-white/10 text-base text-white p-5 rounded-xl 
+               shadow-md w-80 backdrop-blur-md"
+  >
+    "Bekerja dengannya sangat menyenangkan."
+    <footer className="text-right mt-3 text-sm text-gray-400">– Fajril</footer>
+  </motion.blockquote>
 
-            <blockquote className="absolute bottom-6 right-0 bg-gradient-to-br from-white/5 to-white/10 border border-white/10 text-base text-white p-5 rounded-xl shadow-md w-80 rotate-[4deg] backdrop-blur-md">
-              "Desain dan pengembangannya sangat membantu."
-              <footer className="text-right mt-3 text-sm text-gray-400">– Raafi</footer>
-            </blockquote>
-          </div>
+  <motion.blockquote
+    animate={{
+      y: [6, -6, 6],
+      rotate: [4, 2, 4],
+    }}
+    transition={{
+      duration: 6,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay: 1.2,
+    }}
+    className="absolute bottom-6 right-0 bg-gradient-to-br from-white/5 to-white/10 
+               border border-white/10 text-base text-white p-5 rounded-xl 
+               shadow-md w-80 backdrop-blur-md"
+  >
+    "Desain dan pengembangannya sangat membantu."
+    <footer className="text-right mt-3 text-sm text-gray-400">– Raafi</footer>
+  </motion.blockquote>
+</div>
+
         </div>
       </section>
 
@@ -164,44 +254,66 @@ export default function Hero() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl font-bold mb-8 text-center md:text-left">Featured Projects</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map(({ src, alt, span = '', aspect, live, github }) => {
-              const isFourThree = aspect === 'aspect-[4/3]';
-              return (
-                <div key={src} className={`relative group ${span}`}>
-                  <div className={`overflow-hidden ${aspect} rounded-lg`}>
-                    <Image 
-                      src={src} 
-                      alt={alt} 
-                      fill 
-                      className={`object-cover transition-transform duration-300 group-hover:scale-105 ${isFourThree ? 'object-top' : 'object-center'}`}
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      loading="lazy"
-                    />
-                  </div>
+          {projects.map(({ src, title, desc, tech, span = '', aspect, live, github }) => (
+  <div
+    key={src}
+    className={`rounded-2xl bg-white/5 backdrop-blur border border-white/10 
+                overflow-hidden ${span}`}
+  >
+    {/* image */}
+    <div className={`relative ${aspect}`}>
+      <Image
+        src={src}
+        alt={title}
+        fill
+        className="object-cover"   
+      />
+    </div>
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40 rounded-lg flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2 pointer-events-auto">
-                 <a 
-  href={live} 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full font-medium text-sm hover:bg-gray-200 transition"
->
-  <BiLinkExternal className="w-5 h-5"/> Live Demo
-</a>
+    {/* content */}
+    <div className="p-5 space-y-3">
+      <h3 className="text-lg font-semibold">{title}</h3>
 
-                    <a 
-  href={github} 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-full font-medium text-sm hover:opacity-90 transition"
->
-  <FaGithub className="w-5 h-5"/> View Code
-</a>
-                  </div>
-                </div>
-              )
-            })}
+      <p className="text-sm text-gray-400">{desc}</p>
+
+      {/* tech badges */}
+      <div className="flex flex-wrap gap-2">
+        {tech.map((t, i) => (
+          <span
+            key={i}
+            className="px-3 py-1 text-xs rounded-full bg-white/10 text-gray-300"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* buttons */}
+      <div className="flex items-center gap-3 pt-2">
+        <a
+          href={github}
+          target="_blank"
+          className="flex items-center gap-2 px-4 py-2 rounded-full
+                     border border-white/10 text-sm hover:bg-white/10 transition"
+        >
+          <FaGithub className="w-4 h-4" />
+          Code
+        </a>
+
+        <a
+          href={live}
+          target="_blank"
+          className="flex items-center gap-2 px-4 py-2 rounded-full
+                     bg-white text-black text-sm font-medium
+                     hover:bg-gray-200 transition"
+        >
+          <BiLinkExternal className="w-4 h-4" />
+          Live
+        </a>
+      </div>
+    </div>
+  </div>
+))}
           </div>
         </div>
       </section>
@@ -211,23 +323,50 @@ export default function Hero() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl font-bold mb-12 text-center md:text-left">Certificate</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certificates.map(({ src, alt }) => (
-              <a key={src} href={src} target="_blank" rel="noopener noreferrer" className="relative group">
-                <Image
-                  src={src}
-                  alt={alt}
-                  width={600}
-                  height={400}
-                  className="rounded-lg w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-lg font-semibold">View Certificate</span>
-                </div>
-              </a>
-            ))}
-          </div>
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {certificates.map(({ src, title, desc, issuer, year }) => (
+    <div
+      key={src}
+      className="rounded-2xl bg-white/5 backdrop-blur border border-white/10 overflow-hidden"
+    >
+      {/* image */}
+      <div className="relative aspect-[4/3]">
+        <Image
+          src={src}
+          alt={title}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* content */}
+      <div className="p-5 space-y-3">
+        <h3 className="text-lg font-semibold">{title}</h3>
+
+        {/* issuer + year */}
+        <div className="flex items-center justify-between text-xs">
+          <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300">
+            {issuer}
+          </span>
+          <span className="text-gray-400">{year}</span>
+        </div>
+
+        <p className="text-sm text-gray-400">{desc}</p>
+
+        <a
+          href={src}
+          target="_blank"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+                     bg-white text-black text-sm font-medium
+                     hover:bg-gray-200 transition"
+        >
+          <BiLinkExternal className="w-4 h-4" />
+          View Certificate
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
         </div>
       </section>
 
@@ -235,17 +374,34 @@ export default function Hero() {
       <section id="skills" className="bg-black py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl font-bold mb-8 text-center md:text-left">Skills</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
-        {skills.map((skill, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md hover:scale-105 transition-transform"
-          >
-            <div className="text-6xl mb-2">{skill.icon}</div>
-            <span className="text-sm sm:text-base text-gray-300">{skill.name}</span>
-          </div>
-        ))}
-      </div>
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
+      {skills.map((skill, i) => (
+        <motion.div
+  key={i}
+  animate={{
+    y: [-6, 6, -6],   // floating naik-turun
+  }}
+  transition={{
+    duration: 4,
+    repeat: Infinity,
+    ease: 'easeInOut',
+    delay: i * 0.15,
+  }}
+  whileHover={{
+    scale: 1.15,
+    rotate: 6,
+  }}
+  className="flex flex-col items-center gap-2 p-4 rounded-xl
+             bg-white/5 backdrop-blur border border-white/10"
+>
+  {skill.icon}
+  <span className="text-xs text-gray-400">
+    {skill.level}
+  </span>
+</motion.div>
+
+      ))}
+    </div>
         </div>
       </section>
 
